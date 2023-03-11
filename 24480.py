@@ -8,7 +8,7 @@ for i in range(m):
     graph[a].append(b)
     graph[b].append(a)
 for i in range(1,n+1):
-    graph[i].sort(reverse=True)
+    graph[i].sort()
 visited=[0]*(n+1)
 def dfs(R):
     s=deque([R])
