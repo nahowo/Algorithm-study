@@ -28,7 +28,7 @@ elif number_num[0]==3: #6
 elif number_num[:2]==[2,2]: #7
     score=int(keylist[0])*10+int(keylist[1])+300
 elif number_num[0]==2: #8
-    score=int(keylist)[0]+200
+    score=int(keylist[0])+200
 else: #9
     score=int(keylist[0])+100
 print(score)
