@@ -6,10 +6,6 @@ answer=0
 rope=[int(input()) for _ in range(n)]
 rope.sort(reverse=True)
 for i in range(1,n+1):
-    sum_+=rope[i-1]
-    tmp=sum_/i
-    if tmp>rope[i-1]:
-        sum_-=rope[i-1]
     if rope[i-1]*i>answer:
         answer=rope[i-1]*i
 print(answer)
