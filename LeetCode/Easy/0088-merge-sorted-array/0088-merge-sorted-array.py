@@ -24,4 +24,5 @@ class Solution:
                 s1+=1
                 nums.append(nums2[s2])
                 s2+=1
-        nums1[:] = nums[:-1]
+        nums.pop()
+        nums1[:] = nums
