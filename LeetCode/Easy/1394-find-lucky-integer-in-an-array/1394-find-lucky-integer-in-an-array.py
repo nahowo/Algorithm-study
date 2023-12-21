@@ -5,7 +5,7 @@ class Solution(object):
         :rtype: int
         """
         lucky=set([-1])
-        for i in range(len(arr)):
-            if arr.count(arr[i])==arr[i]:
-                lucky.add(arr[i])
+        for i in set(arr):
+            if arr.count(i)==i:
+                lucky.add(i)
         return max(lucky)
