@@ -4,8 +4,11 @@ class Solution(object):
         :type arr: List[int]
         :rtype: int
         """
-        lucky=set([-1])
-        for i in set(arr):
-            if arr.count(i)==i:
-                lucky.add(i)
-        return max(lucky)
+        lucky = set()
+        for num in set(arr):
+            if arr.count(num) == num:
+                lucky.add(num)
+        if len(lucky) > 0:
+            return max(lucky)
+        else:
+            return -1
