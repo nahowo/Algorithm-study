@@ -5,7 +5,16 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        nums.sort() # O(nlogn)
-        return nums[-k] # O(n)
         
-        # O(nlogn)+O(n) = O(nlogn)
+        # solution without sorting
+        
+        import heapq
+        
+        for i in range(len(nums)): # O(n)
+            nums[i]=-nums[i]
+        heapq.heapify(nums) # O(n)
+        for i in range(k): # O(n)
+            kth=heapq.heappop(nums) # O(logn)
+        return -kth
+        
+        # O(nlogn) + O(n) + O(n)
