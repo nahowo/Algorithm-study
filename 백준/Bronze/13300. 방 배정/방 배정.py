@@ -9,9 +9,9 @@ for i in range(n):
     room[s*6+(y-1)]+=1
 
 for i in range(12):
-    if 0<room[i]<p:
-        total_room+=1
+    if room[i]%p==0:
+        total_room+=room[i]//p
     else:
-        total_room+=int((room[i]/p)+0.5)
+        total_room+=(room[i]//p)+1
 
 print(total_room)
