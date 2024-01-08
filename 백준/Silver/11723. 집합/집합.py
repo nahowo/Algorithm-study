@@ -1,30 +1,24 @@
 import sys
 input=sys.stdin.readline
 
-m=int(input())
-s=set()
-a=set(range(1,21))
+def main():
+    m=int(input())
+    s=0 # 집합 초기화
+    a=(1<<21)-1 # 1~20까지의 원소가 들어있는 집합
 
-res=[]
-for i in range(m):
-    comm=input().rstrip()
-    if comm=='all':
-        s=a.copy()
-        continue
-    elif comm=='empty':
-        s.clear()
-        continue
-    comm,x=comm.split()
-    x=int(x)
-    if comm=='add':
-        s.add(x)
-    elif comm=='remove':
-        if x in s:
-            s.remove(x)
-    elif comm=='check':
-        print(int(x in s))
-    elif comm=='toggle':
-        if x in s:
-            s.remove(x)
-        else:
-            s.add(x)
+    for i in range(m):
+        cmd=input().rstrip().split()
+        if cmd[0]=='all':
+            s=a
+        elif cmd[0]=='empty':
+            s=0
+        elif cmd[0]=='add':
+            s=(1<<(20-int(cmd[1])))|s
+        elif cmd[0]=='remove':
+            s=~(1<<(20-int(cmd[1])))&s
+        elif cmd[0]=='toggle':
+            s=(1<<(20-int(cmd[1])))^s
+        elif cmd[0]=='check':
+            print(int(bool((1<<(20-int(cmd[1])))&s)))
+
+main()
