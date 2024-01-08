@@ -19,6 +19,6 @@ def main():
         elif cmd[0]=='toggle':
             s=(1<<(20-int(cmd[1])))^s
         elif cmd[0]=='check':
-            print(int(bool((1<<(20-int(cmd[1])))&s)))
+            sys.stdout.write('1\n' if (bool((1<<(20-int(cmd[1])))&s)) else '0\n')
 
 main()
