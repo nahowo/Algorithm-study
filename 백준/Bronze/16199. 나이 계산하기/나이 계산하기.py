@@ -7,7 +7,7 @@ ty,tm,td=map(int,input().split())
 if tm>bm or (tm==bm and td>=bd):
     year1=ty-by
 else:
-    year1=max((ty-by-1),0)
+    year1=ty-by-1
 
 year2=ty-by+1
 year3=ty-by
