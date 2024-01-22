@@ -3,16 +3,24 @@ input=sys.stdin.readline
 
 def func():
     n,m=map(int,input().split())
-    s=set()
-    cnt=0
+    s=[]
+    check=[]
     for _ in range(n):
-        tmp=input().rstrip()
-        for i in range(1,len(tmp)+1):
-            s.add(tmp[:i])
-    for i in range(m):
-        check=input().rstrip()
-        if check in s:
-            cnt+=1
+        s.append(input().rstrip())
+    for _ in range(m):
+        check.append(input().rstrip())
+    s.sort()
+    check.sort()
+    s_key=c_key=0
+    cnt=0
+
+    while s_key<n and c_key<m:
+        if s[s_key]<check[c_key]:
+            s_key+=1
+        else:
+            if s[s_key][:len(check[c_key])]==check[c_key]:
+                cnt+=1
+            c_key+=1
     return cnt
 
 print(func())
