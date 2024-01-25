@@ -23,7 +23,7 @@ def func():
                 dog[i]=-1
             else:
                 dog[i]=dog[i-a]+1
-
+    
         elif dog[i-a]==-1 and dog[i-b]==-1:
             dog[i]=-1
         elif dog[i-a]==-1:
@@ -32,16 +32,6 @@ def func():
             dog[i]=dog[i-a]+1
         else:
             dog[i]=min(dog[i-a],dog[i-b])+1
-        # else:
-        #     tmplist=[]
-        #     for j in [a,b]:
-        #         if dog[i-j]!=False:
-        #             tmplist.append(dog[i-j]+1)
-        #     if len(tmplist)<1:
-        #         dog[i]=False
-        #     else:
-        #         dog[i]=min(tmplist)
-    # return dog[-1] if dog[-1]!=False else -1
     return dog[n]
 
 print(func())
