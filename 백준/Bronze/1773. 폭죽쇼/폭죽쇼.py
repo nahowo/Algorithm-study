@@ -3,16 +3,11 @@ input=sys.stdin.readline
 
 def func():
     n,c=map(int,input().split())
-    fire=[0]*(2000001)
+    time=[0]*c
     for _ in range(n):
         tmp=int(input())
-        k=tmp
-        while True:
-            if k<=c:
-                fire[k]=1
-                k+=tmp
-            else:
-                break
-    return sum(fire)
-
+        if tmp==1:
+            return c
+        time[tmp-1::tmp]=[1]*(c//tmp)
+    return sum(time)
 print(func())
