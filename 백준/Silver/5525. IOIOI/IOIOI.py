@@ -6,11 +6,20 @@ def func():
     m=int(input())
     s=input().rstrip()
     cnt=0
-    p="IO"*n+"I"
-    for i in range(m-(2*n)):
-        if s[i:i+(2*n)+1]==p:
-            cnt+=1
+    res=0
+    
     i=0
-    return cnt
+    while i<(m-1):
+        if s[i:i+3]=="IOI":
+            i+=2
+            cnt+=1
+            if cnt==n:
+                res+=1
+                cnt-=1
+        else:
+            i+=1
+            cnt=0
+
+    return res
 
 print(func())
