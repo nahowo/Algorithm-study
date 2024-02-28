@@ -1,8 +1,6 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        a,b=1,2
-        if n==1:
-            return a
-        for i in range(2,n):
-            a,b=b,a+b
-        return b
+        dp=[0,1,2]+[0]*(n-2)
+        for i in range(3,n+1):
+            dp[i]=dp[i-1]+dp[i-2]
+        return dp[n]
