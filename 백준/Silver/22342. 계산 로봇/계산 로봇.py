@@ -11,8 +11,6 @@ def func():
 
     # 저장값
     save=[[0]*n for _ in range(m)]
-    for i in range(m):
-        save[i][0]=d[i][0]
     
     # 출력값
     output=[[0]*n for _ in range(m)]
