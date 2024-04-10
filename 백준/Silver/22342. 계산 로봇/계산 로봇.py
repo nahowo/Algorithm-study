@@ -3,13 +3,12 @@ input=sys.stdin.readline
 
 def func():
     m,n=map(int,input().split())
-    maxSave=0
 
     # 가중치
     d=[]
     for _ in range(m):
         d.append(list(map(int,list(input().rstrip()))))
-    
+
     # 저장값
     save=[[0]*n for _ in range(m)]
     for i in range(m):
@@ -26,10 +25,14 @@ def func():
             tmp=[]
             for k in range(i-1,i+2):
                 if 0<=k<m:
-                    tmp.append(output[j-1][k])
-            save[i][j]=max(tmp)              # 저장값 계산
-            maxSave=max(maxSave,save[i][j])  # 최대값 업데이트
+                    tmp.append(output[k][j-1])
+            save[i][j]=max(tmp) # 저장값 계산
             output[i][j]=save[i][j]+d[i][j]
+    
+    maxSave=0
+    for i in save: # 최대값 계산
+        maxSave=max(max(i),maxSave)
+
     return maxSave
 
 print(func())
