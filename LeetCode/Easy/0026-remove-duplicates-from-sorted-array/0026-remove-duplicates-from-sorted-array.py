@@ -6,6 +6,6 @@ class Solution:
             i+=100
             if not check[i]:
                 nums[k]=i-100
-                k+=1
+                k += 1
                 check[i]=True
         return k
