@@ -12,7 +12,7 @@ class Solution:
                 if strs[0][j]==strs[i][j]:
                     cnt+=1
             if cnt == n:
-                answer+=strs[0][j]
+                answer += strs[0][j]
             else:
                 return answer
         return answer
