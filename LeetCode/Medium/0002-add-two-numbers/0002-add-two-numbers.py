@@ -8,6 +8,7 @@ class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         s1=[]
         s2=[]
+        
         while l1!=None:
             s1.append(l1.val)
             l1=l1.next
