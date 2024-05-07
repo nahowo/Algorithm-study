@@ -4,10 +4,10 @@ class Solution:
         n=len(strs)
         m=200
         for i in strs:
-            m=min(m,len(i))
+            m =min(m,len(i))
             
         for j in range(m):
-            cnt=0
+            cnt = 0
             for i in range(n):
                 if strs[0][j] ==strs[i][j]:
                     cnt+=1
