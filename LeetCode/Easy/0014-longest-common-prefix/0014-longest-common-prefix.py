@@ -11,7 +11,7 @@ class Solution:
             for i in range(n):
                 if strs[0][j]==strs[i][j]:
                     cnt+=1
-            if cnt==n:
+            if cnt == n:
                 answer+=strs[0][j]
             else:
                 return answer
