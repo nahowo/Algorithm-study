@@ -5,8 +5,9 @@ class Solution:
     def firstBadVersion(self, n: int) -> int:
         s=1
         e=n
-        answer=n
         
+        answer=n
+
         while s<=e:
             m=int((s+e)/2)
             if not isBadVersion(m):
