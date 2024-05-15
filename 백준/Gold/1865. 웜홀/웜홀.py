@@ -1,29 +1,27 @@
 import sys
-input = sys.stdin.readline
+input=sys.stdin.readline
+INF=10000
 
-def floyd():
-    for k in range(1, n + 1):       # 거쳐갈 경유지
-        for i in range(1, n + 1):   # 출발지
-            if k == i:              # 경유지와 출발지는 달라야 한다
-                continue
-            for j in range(1, n + 1):   # 목적지
-                if k == j:          # 경유지와 목적지도 달라야 한다
-                    continue
-                arr[i][j] = min(arr[i][j], arr[i][k] + arr[k][j])   # 경유하는 거리가 짧으면 바꿔준다.
-                if arr[i][i] < 0:           # 하나라도 0보다 작으면 YES를 출력
-                    return 'YES'                
+def func():
+    for k in range(1,n+1): # 경유지
+        for i in range(1,n+1):
+            if k!=i:
+                for j in range(1,n+1):
+                    if k!=j:
+                        route[i][j]=min(route[i][j],route[i][k]+route[k][j])
+                        if route[i][i]<0:
+                            return 'YES'
     return 'NO'
 
-for tc in range(int(input().rstrip())):
-    n, m, w = map(int, input().split())     # n : 지점의 수 m : 도로의 수 w : 웜홀의 수
-    INF = n * 10000
-    arr = [[INF] * (n + 1) for _ in range(n + 1)]
-    for i in range(m):  # 도로는 방향이 없는 그래프
-        s, e, t = map(int, input().split())
-        arr[s][e] = min(t, arr[s][e])       # 가장 작은 값을 넣어준다.
-        arr[e][s] = min(t, arr[e][s])       # 가장 작은 값을 넣어준다.
-    for i in range(w):  # 웜홀은 방향 있는 그래프
-        s, e, t = map(int, input().split())
-        arr[s][e] = min(-t, arr[s][e])      # 음수도 가장 작은 값을 넣어준다.
-    
-    print(floyd())
+tc=int(input())
+for _ in range(tc):
+    n,m,w=map(int,input().split())
+    route=[[INF]*(n+1) for _ in range(n+1)]
+    for _ in range(m): # 도로 정보 입력: 양방항, 최솟값으로 업데이트
+        s,e,t=map(int,input().split())
+        route[s][e]=min(route[s][e],t)
+        route[e][s]=min(route[e][s],t)
+    for _ in range(w): # 웜홀 정보 입력: 단방향, 최솟값으로 업데이트
+        s,e,t=map(int,input().split())
+        route[s][e]=min(route[s][e],(-1)*t) # 시간 정보는 *-1 처리 
+    print(func())
