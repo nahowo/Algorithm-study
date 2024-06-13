@@ -1,0 +1,61 @@
+# -*- coding: utf-8 -*-
+# UTF-8 encoding when using korean
+
+# 1. 변수 입력
+# 2. A, B 정렬, 각 원소 빈도수별로 딕셔너리에 저장
+# 3. 대푯값 탐색
+#        [x-2,x+2] 범위 내의 원소 빈도수 총합 계산
+#        총합이 기존보다 큰 경우에만 업데이트(가장 작은 x를 만족시키기 위해)
+
+import sys
+input=sys.stdin.readline
+
+def main():
+	n=int(input())
+	a=sorted(list(map(int,input().split())))
+	b=sorted(list(map(int,input().split())))
+	
+	# 크기별 쥐의 빈도수 저장
+	aDict=dict()
+	bDict=dict()
+	for i in range(n):
+		aDict[a[i]]=aDict.get(a[i],0)+1
+		bDict[b[i]]=bDict.get(b[i],0)+1
+	
+	# A 그룹의 대푯값 추출
+	aRep=0
+	aCnt=0
+	for i in range(a[0],a[-1]+1):
+		tmpCnt=countRange(i,aDict)
+		if tmpCnt>aCnt:
+			aRep=i
+			aCnt=tmpCnt
+	
+	# B 그룹의 대푯값 추출
+	bRep=0
+	bCnt=0
+	for i in range(b[0],b[-1]+1):
+		tmpCnt=countRange(i,bDict)
+		if tmpCnt>bCnt:
+			bRep=i
+			bCnt=tmpCnt
+	
+	print(aRep,bRep)
+	# A 대푯값과 B 대푯값 비교
+	if aRep>bRep:
+		return "good"
+	else:
+		return "bad"
+
+# X를 기준으로 구간에 속하는 쥐 수를 세는 함수
+def countRange(x,d):
+	mouseCnt=0
+	for i in range(x-2,x+3):
+		if i in d:
+			mouseCnt+=d[i]
+	
+	return mouseCnt
+
+print(main())
+
+# 시간복잡도: 정렬에 O(nlogn), 빈도수, 대푯값 추출에 O(n) -> 전체 시간복잡도는 O(nlogn)
