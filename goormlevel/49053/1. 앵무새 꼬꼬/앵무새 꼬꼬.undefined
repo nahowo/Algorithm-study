@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# UTF-8 encoding when using korean
+'''
+문자열 순회
+	모음인 경우만 문장에 추가
+문장이 비어있으면 "???"로 대체
+문장 출력
+'''
+import sys
+input=sys.stdin.readline
+vowel={'a','e','i','o','u','A','E','I','O','U'}
+
+# 문장에서 모음만 추출하는 함수
+def selectVowel(s):
+	sentence=''
+	for i in s:
+		if i in vowel:
+			sentence+=i
+	
+	return sentence if len(sentence)>0 else '???'
+
+def main():
+	n=int(input())
+	for _ in range(n):
+		s=input().rstrip()
+		print(selectVowel(s))
+
+main()
