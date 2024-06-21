@@ -12,11 +12,11 @@ rl.on('line', function (line) {
     str = input[0];
     answer = "";
     for (i = 0; i < str.length; i++) {
-        tmp = str[i].charCodeAt();
-        if (65 <= tmp && tmp <= 90) {
-            answer += String.fromCharCode(tmp+32);
+        tmp = str[i];
+        if (tmp === tmp.toLowerCase()) { // 소문자인 경우
+            answer += tmp.toUpperCase();
         } else {
-            answer += String.fromCharCode(tmp-32);
+            answer += tmp.toLowerCase();
         }
     }
     console.log(answer)
