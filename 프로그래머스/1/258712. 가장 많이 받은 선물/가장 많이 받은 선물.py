@@ -55,12 +55,17 @@ def solution(friends, gifts):
             if i != j:
                 tmp1 = exchangedPresent(presentArr, friends[i], friends[j], person)
                 if tmp1 != False:
+                    print(tmp1)
                     nextPresent[person[tmp1]] += 1
                 else:
                     tmp2 = presentPoint(presentDict, friends[i], friends[j])
                     if tmp2 != False:
+                        print(tmp2)
                         nextPresent[person[tmp2]] += 1
+    print(presentArr)
     print(presentDict)
+    print(person)
+    print(nextPresent)
     answer = max(nextPresent) // 2 # 두 번씩 비교하므로 2로 나누기
     
     return answer
