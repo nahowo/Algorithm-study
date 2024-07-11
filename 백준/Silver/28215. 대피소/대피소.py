@@ -1,53 +1,70 @@
+# import sys
+# input = sys.stdin.readline
+# from itertools import combinations
+
+# def distance(a, b):
+#     return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+# def solution(combi):
+#     tmpMax = 0
+#     for i in range(n):
+#         tmpMin = sys.maxsize
+#         for j in combi:
+#             dist = distance(houese[i], houese[j])
+#             tmpMin = min(dist, tmpMin)
+#         tmpMax = max(tmpMin, tmpMax)
+#     return tmpMax
+
+
+# n, k = map(int,input().split())
+# houese = []
+# for i in range(n):
+#     houese.append(list(map(int, input().split())))
+
+# maxLength = sys.maxsize
+# for combi in combinations(range(n), k):
+#     maxLength = min(maxLength, solution(combi))
+
+# print(maxLength)
+
 import sys
 input = sys.stdin.readline
+from itertools import combinations
 
-minLength = sys.maxsize
-def distance(x1, y1, x2, y2):
-    return abs(x1 - x2) + abs(y1 - y2)
+def distance(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-def select(cnt):
-    global minLength
+def combination(c, s, cnt):
     if cnt == k:
-        tmpLength = [False] * n
-        for i in range(n): # 대피소를 설치한 집
-            if check[i] == True:
-                for j in range(n): # 대피소를 설치하지 않은 집
-                    if i != j and check[j] != True:
-                        if tmpLength[j] == False:
-                            tmpLength[j] = dist[i][j]
-                        else:
-                            tmpLength[j] = min(tmpLength[j], dist[i][j])
-        minLength = min(minLength, max(tmpLength))
+        combi.append(c.copy())
         return
-        
-    for i in range(n):
-        if check[i] == False:
-            check[i] = True
-            select(cnt + 1)
-            check[i] = False
-
-def solution():
-    global dist, idx, n, k, check
-    n, k = map(int, input().split())
-    houses = []
-    idx = dict()
-    for i in range(n):
-        x, y = map(int, input().split())
-        idx[str(x) + ',' + str(y)] = i
-        houses.append([x, y])
     
-    dist = [[0] * n for _ in range(n)]
-    for i in range(n):
-        for j in range(n):
-            dist[i][j] = distance(houses[i][0], houses[i][1], houses[j][0], houses[j][1])
-    
-    for i in range(n):
-        check = [False] * n
-        check[i] = True
-        select(1)
-        check[i] = False
+    for i in range(s, n):
+        if i not in c:
+            c.append(i)
+            combination(c, i + 1, cnt + 1)
+            c.pop()
 
-    return
+def solution(combi):
+    tmpMax = 0
+    for i in range(n):
+        tmpMin = sys.maxsize
+        for j in combi:
+            dist = distance(houese[i], houese[j])
+            tmpMin = min(dist, tmpMin)
+        tmpMax = max(tmpMin, tmpMax)
+    return tmpMax
 
-solution()
-print(minLength)
+
+n, k = map(int,input().split())
+houese = []
+for i in range(n):
+    houese.append(list(map(int, input().split())))
+combi = []
+combination([], 0, 0)
+
+maxLength = sys.maxsize
+for c in combi:
+    maxLength = min(maxLength, solution(c))
+
+print(maxLength)
