@@ -2,29 +2,29 @@ import sys
 input = sys.stdin.readline
 
 def checkVertical(n, grid): # 세로줄 확인
-    s = set()
+    s = [False] * 10
     for i in range(9):
-        if grid[i][n] not in s:
-            s.add(grid[i][n])
+        if not s[grid[i][n]]:
+            s[grid[i][n]] = True
         else:
             return False
     return True
 
 def checkHorizontal(n, grid): # 가로줄 확인
-    s = set()
+    s = [False] * 10
     for i in range(9):
-        if grid[n][i] not in s:
-            s.add(grid[n][i])
+        if not s[grid[n][i]]:
+            s[grid[n][i]] = True
         else:
             return False
     return True
 
 def checkSquare(x, y, grid): # 3 * 3 네모 확인
-    s = set()
+    s = [False] * 10
     for i in range(x, x + 3):
         for j in range(y, y + 3):
-            if grid[i][j] not in s:
-                s.add(grid[i][j])
+            if not s[grid[i][j]]:
+                s[grid[i][j]] = True
             else:
                 return False
     return True
