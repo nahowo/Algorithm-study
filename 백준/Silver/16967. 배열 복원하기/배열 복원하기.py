@@ -16,9 +16,10 @@ def solution():
 
     answer = []
     for i in range(x, h + x):
-        answer.append(aTable[i][y : w + y])
+        answer.append(' '.join(map(str, aTable[i][y : w + y])))
     return answer
 
 result = solution()
+
 for i in result:
-    print(*i)
+    print(i)
