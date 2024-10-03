@@ -3,9 +3,10 @@ input = sys.stdin.readline
 
 def getPrimes(n):
     arr = [True] * (n + 1)
-    for i in range(2, n + 1):
-        for j in range(2, (n // i) + 1):
-            arr[i * j] = False
+    for i in range(2, int(n ** (1 / 2)) + 1):
+        if arr[i] == True:
+            for j in range(i * i, n + 1, i):
+                arr[j] = False
 
     primes = []
     for i in range(2, n + 1):
