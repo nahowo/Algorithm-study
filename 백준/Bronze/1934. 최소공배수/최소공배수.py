@@ -1,19 +1,14 @@
 import sys
 input = sys.stdin.readline
 
-def isMutiple(n, i):
-    if i % n == 0:
-        return True
-    return False
+def getGcd(a, b):
+    if a % b == 0:
+        return b
+    return getGcd(b, a % b)
 
 def solution():
     a, b = map(int, input().split())
-    a, b = sorted([a, b]) # a <= b
-    limit = a * b + 1
-    
-    for i in range(b, limit, b):
-        if isMutiple(a, i):
-            return i
+    return a * b // getGcd(a, b)
 
 t = int(input())
 for _ in range(t):
