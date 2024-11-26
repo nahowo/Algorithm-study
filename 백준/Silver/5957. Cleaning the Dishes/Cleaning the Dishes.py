@@ -1,16 +1,12 @@
 import sys
 input = sys.stdin.readline
 
-def wash(d):
-    for _ in range(d):
-        washed.append(unwashed.pop())
-
-def dry(d):
-    for _ in range(d):
-        dried.append(washed.pop())
+def washOrDry(dishA, dishB, dishCnt): # washA -> washB
+    for _ in range(dishCnt):
+        dishB.append(dishA.pop())
 
 def solution():
-    global unwashed, washed, dried, n
+    global n
     n = int(input())
     unwashed = [i for i in range(n, 0, -1)]
     washed = []
@@ -23,9 +19,9 @@ def solution():
         
         c, d = map(int, input().split())
         if c == 1: # wash
-            wash(d)
+            washOrDry(unwashed, washed, d)
         else: # dry
-            dry(d)
+            washOrDry(washed, dried, d)
             driedDishes += d
     return dried
 
