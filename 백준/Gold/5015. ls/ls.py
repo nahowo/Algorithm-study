@@ -2,25 +2,27 @@ import sys
 input = sys.stdin.readline
 
 def recursion(w, s, file): # w는 와일드카드 시작 위치, s는 파일 시작 위치
-    retw = w
-    rets = s
-    if cache[retw][rets] != -1:
-        return cache[retw][rets]
+    if cache[w][s] != -1:
+        return cache[w][s]
     
-    while w < W and s < S and p[w] == file[s]:
-        w += 1
-        s += 1
-    
+    if w < W and s < S and p[w] == file[s]:
+        cache[w][s] = recursion(w + 1, s + 1, file)
+        return cache[w][s]
+
     if w == W:
-        cache[retw][rets] = int(s == S)
-        return cache[retw][rets]
+        cache[w][s] = int(s == S)
+        return cache[w][s]
 
     if p[w] == "*":
-        for skip in range(0, S - s + 1):
-            if recursion(w + 1, s + skip, file):
-                return 1
-    cache[retw][rets] = 0
-    return cache[retw][rets]
+        if recursion(w + 1, s, file):
+            cache[w][s] = 1
+            return cache[w][s]
+        if s < S and recursion(w, s + 1, file):
+            cache[w][s] = 1
+            return cache[w][s]
+    
+    cache[w][s] = 0
+    return cache[w][s]
 
 def solution():
     global W, S, cache, p
