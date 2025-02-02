@@ -4,8 +4,6 @@ input = sys.stdin.readline
 def recursion(w, s, file): # w는 와일드카드 시작 위치, s는 파일 시작 위치
     retw = w
     rets = s
-    tp = p[w:]
-    ts = file[s:]
     if cache[retw][rets] != -1:
         return cache[retw][rets]
     
