@@ -7,20 +7,19 @@ def recursion(n):
     
     ret = 0
     for i in range(n + 1, N):
-        if a[n] < a[i]:
-            ret = recursion(i)
-            cache[n] = max(cache[n], ret + a[n])
-    cache[n] = max(cache[n], a[n])
+        if a[i] > a[n]:
+            ret = max(ret, recursion(i))
+    ret += a[n]
+    cache[n] = ret
     return cache[n]
 
 def solution():
     global a, cache, N, maxSum
-    N = int(input())
-    a = list(map(int, input().split()))
+    N = int(input()) + 1
+    a = [0] + list(map(int, input().split())) # 모든 경우의 수를 탐색하기 위해 패딩
     maxSum = [0] * N
     cache = [-1] * N
-    for i in range(N):
-        recursion(i)
+    recursion(0)
     return max(cache)
 
 print(solution())
