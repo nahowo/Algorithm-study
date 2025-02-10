@@ -12,29 +12,20 @@ def binary(n):
     
     return result[::-1]
 
-def recursion(n, start, end):
-    if start >= end:
+def recursion(n):
+    if len(n) <= 1:
         return 1
+    mid = len(n) // 2
 
-    mid = (start + end) // 2
-
-    if n[mid] == '0' and n[start : end].count('1') > 0:
+    if n[mid] == '0' and '1' in n:
         return 0
-    return recursion(n, start, mid - 1) & recursion(n, mid + 1, end)
+    return recursion(n[: mid]) & recursion(n[mid + 1 :])
 
-def solution(numbers):
-    def check(i, s):
-        if answer[i] and (L:=(len(s)//2)):
-            if s[L]=='0' and ('1' in s):
-                answer[i] = 0
-            else:
-                check(i, s[:L]), check(i, s[L+1:])
-    
-    answer = [1] * len(numbers)
+def solution(numbers):    
+    answer = [0] * len(numbers)
 
     for i in range(len(numbers)):
         tmpN = binary(numbers[i])
-        # tmpL = len(tmpN)
-        check(i, tmpN)
+        answer[i] = recursion(tmpN)
 
     return answer
