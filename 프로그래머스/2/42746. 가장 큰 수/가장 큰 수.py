@@ -1,8 +1,8 @@
 def solution(numbers):
-    maxLen = len(str(max(numbers)))
+    n = len(numbers)
     nums = list(map(str, numbers))
-    nums.sort(key = lambda x: (x * maxLen), reverse = True)
+    nums.sort(key = lambda x: x * 3, reverse = True)
     answer = ''.join(nums)
-    if answer.count('0') == len(answer):
+    if len(answer) == answer.count('0'):
         answer = '0'
     return answer
