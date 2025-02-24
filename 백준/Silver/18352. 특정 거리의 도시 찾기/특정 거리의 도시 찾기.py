@@ -28,10 +28,9 @@ def solution():
         if cnt[x] == k:
             answer.append(x)
 
-    answer.sort()
     if len(answer) == 0:
-        print(-1)
-    for i in answer:
-        print(i)
+        return -1
+    answer.sort()
+    return '\n'.join(map(str, answer))
 
-solution()
+print(solution())
