@@ -1,19 +1,19 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
 
-def func():
-    n=int(input())
-    sticker=[]
+def solution():
+    n = int(input())
+    score = []
     for _ in range(2):
-        sticker.append([0,0]+list(map(int,input().split()))) # +2 패딩 처리
-    dp=[[0]*(n+2) for _ in range(2)] # +2 패딩 처리
-
-    for i in range(2,n+2):
-        dp[0][i]=max(dp[1][i-2],dp[1][i-1])+sticker[0][i]
-        dp[1][i]=max(dp[0][i-2],dp[0][i-1])+sticker[1][i]
+        score.append(list(map(int, input().split())))
+    dp = [[0, 0] for _ in range(n)]
+    dp[0][0], dp[0][1] = score[0][0], score[1][0]
     
-    return max(dp[0][-1],dp[1][-1])
+    for i in range(1, n):
+        dp[i][0] = max(dp[i - 1][1] + score[0][i], dp[i - 1][0])
+        dp[i][1] = max(dp[i - 1][0] + score[1][i], dp[i - 1][1])
+    return max(dp[n - 1])
 
-t=int(input())
+t = int(input())
 for _ in range(t):
-    print(func())
+    print(solution())
