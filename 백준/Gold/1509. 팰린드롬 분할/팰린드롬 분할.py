@@ -1,30 +1,28 @@
 import sys
 input = sys.stdin.readline
-MAX_SIZE = 2500
 
 def solution():
     s = input().rstrip()
     n = len(s)
-    palindrome = [[0] * (n) for _ in range(n)]
-    
-    for i in range(n):
-        palindrome[i][i] = 1
-    
-    for i in range(1, n):
-        if s[i - 1] == s[i]:
-            palindrome[i - 1][i] = 1
+    isP = [[0] * n for _ in range(n)]
 
-    for j in range(2, n): # 종료
-        for i in range(j - 1): # 시작
-            if palindrome[i + 1][j - 1] and s[i] == s[j]:
-                palindrome[i][j] = 1
+    for start in range(n):
+        isP[start][start] = 1
+    for end in range(1, n):
+        start = end - 1
+        if s[start] == s[end]:
+            isP[start][end] = 1
+    for end in range(2, n): # 종료점
+        for start in range(end - 1): # 시작점
+            if s[start] == s[end] and isP[start + 1][end - 1]:
+                isP[start][end] = 1
 
-    dp = [MAX_SIZE] * (n + 1)
-    dp[0] = 0
-    for j in range(n + 1):
-        for i in range(1, j + 1):
-            if palindrome[i - 1][j - 1]:
-                dp[j] = min(dp[j], dp[i - 1] + 1)
+    dp = [i for i in range(n + 1)]
+    for end in range(1, n + 1): # 종료점
+        for start in range(end + 1): # 시작점
+            if isP[start - 1][end - 1]:
+                dp[end] = min(dp[end], dp[start - 1] + 1)
+
     return dp[n]
 
 print(solution())
