@@ -1,8 +1,15 @@
 def solution(number, k):
     answer = []
-    for num in number:
-        while k > 0 and answer and answer[-1] < num:
-            answer.pop()
-            k -= 1
-        answer.append(num)
-    return ''.join(answer[:len(answer) - k])
+    for i in range(len(number)):
+        while k:
+            if len(answer) > 0 and number[i] > answer[-1]:
+                answer.pop()
+                k -= 1
+            else:
+                break
+        answer.append(number[i])
+    while k:
+        answer.pop()
+        k -= 1
+    
+    return ''.join(answer)
