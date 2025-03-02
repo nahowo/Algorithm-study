@@ -1,27 +1,31 @@
 import sys
-input=sys.stdin.readline
-INF=10000
+input = sys.stdin.readline
+INF = 10 ** 8
 
-def func():
-    for k in range(1,n+1): # 경유지
-        for i in range(1,n+1):
-            if k!=i:
-                for j in range(1,n+1):
-                    if k!=j:
-                        route[i][j]=min(route[i][j],route[i][k]+route[k][j])
-                        if route[i][i]<0:
-                            return 'YES'
-    return 'NO'
+def solution():
+    n, m, w = map(int, input().split())
+    route = []
+    # 도로는 무방향 자연수 그래프, 웜홀은 방향 음수 그래프
+    for i in range(m):
+        a, b, c = list(map(int, input().split()))
+        route.append([a, b, c])
+        route.append([b, a, c])
+    for i in range(w):
+        a, b, c = list(map(int, input().split()))
+        route.append([a, b, -c])
+    # 전체 그래프에서 음수 사이클이 하나라도 존재하는지 판별
+    dist = [INF] * (n + 1)
+    dist[1] = 0
+    for i in range(n):
+        updated = False
+        for a, b, c in route:
+            if dist[b] > dist[a] + c:
+                updated = True
+                dist[b] = dist[a] + c
+    if updated:
+        return "YES"
+    return "NO"
 
-tc=int(input())
+tc = int(input())
 for _ in range(tc):
-    n,m,w=map(int,input().split())
-    route=[[INF]*(n+1) for _ in range(n+1)]
-    for _ in range(m): # 도로 정보 입력: 양방항, 최솟값으로 업데이트
-        s,e,t=map(int,input().split())
-        route[s][e]=min(route[s][e],t)
-        route[e][s]=min(route[e][s],t)
-    for _ in range(w): # 웜홀 정보 입력: 단방향, 최솟값으로 업데이트
-        s,e,t=map(int,input().split())
-        route[s][e]=min(route[s][e],(-1)*t) # 시간 정보는 *-1 처리 
-    print(func())
+    print(solution())
