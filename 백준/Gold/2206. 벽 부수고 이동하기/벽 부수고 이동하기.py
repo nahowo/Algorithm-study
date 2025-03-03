@@ -21,7 +21,7 @@ def solution():
                 if maps[nx][ny] == '0' and cnt[nx][ny][c] == 0:
                     cnt[nx][ny][c] = cnt[x][y][c] + 1
                     q.append([nx, ny, c])
-                elif maps[nx][ny] == '1' and c == 0:
+                elif maps[nx][ny] == '1' and c == 0 and cnt[nx][ny][1] == 0:
                     cnt[nx][ny][1] = cnt[x][y][c] + 1
                     q.append([nx, ny, 1])
 
