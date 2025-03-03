@@ -1,22 +1,27 @@
-import sys
+import sys, heapq
 input = sys.stdin.readline
-INF = 10 ** 5
 
 def solution():
     n = int(input())
     if n == 0:
         return 0
-    request = [list(map(int, input().split())) for _ in range(n)]
-    request.sort(key = lambda x: (-x[0], x[1]))
-    schedule = [0] * ((max(request, key = lambda x: x[1]))[1] + 1)
+    request = dict()
+    for _ in range(n):
+        p, d = map(int, input().split())
+        if d in request:
+            request[d].append(p)
+        else:
+            request[d] = [p]
 
-    for i in range(n):
-        pay = request[i][0]
-        day = request[i][1]
-        for j in range(day, 0, -1):
-            if schedule[j] == 0:
-                schedule[j] = pay
-                break
-    return sum(schedule)
+    q = []
+    totalPay = 0
+    for i in range(max(request.keys()), 0, -1):
+        if i in request:
+            for j in request[i]:
+                heapq.heappush(q, -j)
+        if q:
+            totalPay += -heapq.heappop(q)
+    
+    return totalPay
 
 print(solution())
