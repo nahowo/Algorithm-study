@@ -16,10 +16,10 @@ def solution():
     q = [[dist[a], a]]
     while q:
         d, x = heapq.heappop(q)
+        if x == b:
+            return d
         if dist[x] < d:
             continue
-        if x == b:
-            return dist[x]
         for nx in graph[x]:
             if dist[nx] > d + 1:
                 dist[nx] = d + 1
