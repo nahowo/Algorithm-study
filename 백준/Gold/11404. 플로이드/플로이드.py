@@ -1,29 +1,27 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
+INF = 10 ** 8
 
-def func():
-    n=int(input())
-    m=int(input())
-    INF=10**7
-    dp=[[INF]*(n+1) for _ in range(n+1)]
+def solution():
+    n = int(input())
+    m = int(input())
+    dist = [[INF] * (n + 1) for _ in range(n + 1)]
     for _ in range(m):
-        a,b,c=map(int,input().split())
-        dp[a][b]=min(dp[a][b],c)
-    for i in range(1,n+1):
-        dp[i][i]=0
+        a, b, c = map(int, input().split())
+        dist[a][b] = min(dist[a][b], c)
 
-    for k in range(1,n+1):
-        for i in range(1,n+1):
-            if i!=k:
-                for j in range(1,n+1):
-                    if i!=j and j!=k:
-                        dp[i][j]=min(dp[i][j],dp[i][k]+dp[k][j])
+    for k in range(1, n + 1):
+        for i in range(1, n + 1):
+            for j in range(1, n + 1):
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+    
+    for i in range(1, n + 1):
+        dist[i][i] = 0
+        for j in range(1, n + 1):
+            if dist[i][j] == INF:
+                dist[i][j] = 0
+    
+    for i in range(1, n + 1):
+        print(' '.join(map(str, dist[i][1:])))
 
-    for i in dp[1:]:
-        for j in i[1:]:
-            if j==INF:
-                print(0,end=" ")
-            else:
-                print(j,end=" ")
-        print("")
-func()
+solution()
