@@ -1,22 +1,34 @@
 import heapq
 INF = 10 ** 8
 
-def floyd_warshall(n):
-    for k in range(1, n + 1):
-        for i in range(1, n + 1):
-            for j in range(1, n + 1):
-                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+def dijkstra(n, sx):
+    q = [[0, sx]]
+    
+    while q:
+        d, x = heapq.heappop(q)
+        if dist[sx][x] < d:
+            continue
+        for nx, nd in graph[x]:
+            if dist[sx][nx] > d + nd:
+                dist[sx][nx] = d + nd
+                dist[nx][sx] = d + nd
+                heapq.heappush(q, [dist[nx][sx], nx])
 
 def solution(n, s, a, b, fares):
-    global dist
+    global dist, graph
     answer = INF
-    dist = [[INF] * (n + 1) for _ in range(n + 1)]
+    graph = [[] for _ in range(n + 1)]
     for c, d, f in fares:
-        dist[c][d] = f
-        dist[d][c] = f
+        graph[c].append([d, f])
+        graph[d].append([c, f])
+        
+    dist = [[INF] * (n + 1) for _ in range(n + 1)]
     for i in range(1, n + 1):
         dist[i][i] = 0
-    floyd_warshall(n)
+
+    dijkstra(n, s)
+    dijkstra(n, a)
+    dijkstra(n, b)
 
     for i in range(1, n + 1):
         tmpAnswer = dist[s][i] + dist[i][a] + dist[i][b]
