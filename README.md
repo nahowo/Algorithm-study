@@ -1,13 +1,2 @@
-# Algorithm-study
-
-<!---LeetCode Topics Start-->
-# LeetCode Topics
-## Math
-|  |
-| ------- |
-| [1146-greatest-common-divisor-of-strings](https://github.com/nahowo/Algorithm-study/tree/master/1146-greatest-common-divisor-of-strings) |
-## String
-|  |
-| ------- |
-| [1146-greatest-common-divisor-of-strings](https://github.com/nahowo/Algorithm-study/tree/master/1146-greatest-common-divisor-of-strings) |
-<!---LeetCode Topics End-->
+## 알고리즘 문제풀이 기록
+- baekjoon hub, leethub를 사용해 푼 문제와 코드를 자동으로 커밋합니다. 
