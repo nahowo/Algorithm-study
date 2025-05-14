@@ -2,26 +2,21 @@ import sys
 input = sys.stdin.readline
 
 def solution():
-    global n, x
     answer = 0
     n = int(input())
     x = list(map(int, input().split()))
-    for idx in range(n):
-        answer += calcDist(idx)
-    return answer
+    pos = set(x)
+    for s in range(n):
+        for e in range(s + 1, n):
+            if s == e:
+                continue
+            dist = abs(x[e] - x[s])
+            if dist % 2:
+                continue
+            if max(x[s], x[e]) - dist // 2 in pos:
+                answer += 1
 
-def calcDist(idx):
-    count = 0
-    dist = set()
-    for i in range(n):
-        if i == idx:
-            continue
-        d = abs(x[idx] - x[i])
-        if d in dist:
-            count += 1
-        else:
-            dist.add(d)
-    return count
+    return answer
 
 t = int(input())
 for _ in range(t):
