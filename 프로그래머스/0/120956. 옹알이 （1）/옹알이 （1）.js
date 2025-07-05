@@ -8,15 +8,14 @@ function solution(babbling) {
 
 function check(word) {
     let l = word.length;
-    word = word.replace(/aya/, " ");
-    word = word.replace(/ye/, " ");
-    word = word.replace(/woo/, " ");
-    word = word.replace(/ma/, " ");
+    word = word.replace(/aya/, "   ");
+    word = word.replace(/ye/, "  ");
+    word = word.replace(/woo/, "   ");
+    word = word.replace(/ma/, "  ");
     
-    for (let w of word) {
-        if (w != " ") {
-            return 0;
-        }
+    const regexp = new RegExp(`\\s{${l}}`);
+    if (word.match(regexp)) {
+        return 1;
     }
-    return 1;
+    return 0;
 }
